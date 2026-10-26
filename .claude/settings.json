@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=$(jq -r \".tool_input.file_path // empty\"); case \"$file\" in \"$CLAUDE_PROJECT_DIR\"/*) cd \"$CLAUDE_PROJECT_DIR\" && pnpm exec oxlint --fix --no-error-on-unmatched-pattern \"$file\"; pnpm exec oxfmt --no-error-on-unmatched-pattern \"$file\" ;; esac 2>/dev/null || true",
+            "statusMessage": "Running oxlint and oxfmt"
+          }
+        ]
+      }
+    ]
+  }
+}

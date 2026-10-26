@@ -11,10 +11,23 @@
 import { Route as rootRouteImport } from './app/__root'
 import { Route as FrontendRouteImport } from './app/_frontend'
 import { Route as PayloadRouteImport } from './app/_payload'
+import { Route as ExitPreviewRouteImport } from './app/exit-preview'
+import { Route as PagesSitemapDotxmlRouteImport } from './app/pages-sitemap[.]xml'
+import { Route as PostsSitemapDotxmlRouteImport } from './app/posts-sitemap[.]xml'
+import { Route as PreviewRouteImport } from './app/preview'
+import { Route as RobotsDottxtRouteImport } from './app/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './app/sitemap[.]xml'
 import { Route as FrontendIndexRouteImport } from './app/_frontend/index'
+import { Route as FrontendLocaleRouteImport } from './app/_frontend/$locale'
+import { Route as FrontendLocaleIndexRouteImport } from './app/_frontend/$locale/index'
+import { Route as FrontendLocaleSlugRouteImport } from './app/_frontend/$locale/$slug'
+import { Route as FrontendLocaleSearchRouteImport } from './app/_frontend/$locale/search'
 import { Route as PayloadAdminIndexRouteImport } from './app/_payload/admin.index'
 import { Route as PayloadAdminSplatRouteImport } from './app/_payload/admin.$'
 import { Route as PayloadApiSplatRouteImport } from './app/_payload/api.$'
+import { Route as FrontendLocalePostsIndexRouteImport } from './app/_frontend/$locale/posts/index'
+import { Route as FrontendLocalePostsSlugRouteImport } from './app/_frontend/$locale/posts/$slug'
+import { Route as FrontendLocalePostsPagePageNumberRouteImport } from './app/_frontend/$locale/posts/page.$pageNumber'
 
 const FrontendRoute = FrontendRouteImport.update({
   id: '/_frontend',
@@ -24,10 +37,60 @@ const PayloadRoute = PayloadRouteImport.update({
   id: '/_payload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExitPreviewRoute = ExitPreviewRouteImport.update({
+  id: '/exit-preview',
+  path: '/exit-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesSitemapDotxmlRoute = PagesSitemapDotxmlRouteImport.update({
+  id: '/pages-sitemap.xml',
+  path: '/pages-sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsSitemapDotxmlRoute = PostsSitemapDotxmlRouteImport.update({
+  id: '/posts-sitemap.xml',
+  path: '/posts-sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreviewRoute = PreviewRouteImport.update({
+  id: '/preview',
+  path: '/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrontendIndexRoute = FrontendIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => FrontendRoute,
+} as any)
+const FrontendLocaleRoute = FrontendLocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
+  getParentRoute: () => FrontendRoute,
+} as any)
+const FrontendLocaleIndexRoute = FrontendLocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FrontendLocaleRoute,
+} as any)
+const FrontendLocaleSlugRoute = FrontendLocaleSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FrontendLocaleRoute,
+} as any)
+const FrontendLocaleSearchRoute = FrontendLocaleSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => FrontendLocaleRoute,
 } as any)
 const PayloadAdminIndexRoute = PayloadAdminIndexRouteImport.update({
   id: '/admin/',
@@ -44,46 +107,153 @@ const PayloadApiSplatRoute = PayloadApiSplatRouteImport.update({
   path: '/api/$',
   getParentRoute: () => PayloadRoute,
 } as any)
+const FrontendLocalePostsIndexRoute =
+  FrontendLocalePostsIndexRouteImport.update({
+    id: '/posts/',
+    path: '/posts/',
+    getParentRoute: () => FrontendLocaleRoute,
+  } as any)
+const FrontendLocalePostsSlugRoute = FrontendLocalePostsSlugRouteImport.update({
+  id: '/posts/$slug',
+  path: '/posts/$slug',
+  getParentRoute: () => FrontendLocaleRoute,
+} as any)
+const FrontendLocalePostsPagePageNumberRoute =
+  FrontendLocalePostsPagePageNumberRouteImport.update({
+    id: '/posts/page/$pageNumber',
+    path: '/posts/page/$pageNumber',
+    getParentRoute: () => FrontendLocaleRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof FrontendIndexRoute
+  '/exit-preview': typeof ExitPreviewRoute
+  '/pages-sitemap.xml': typeof PagesSitemapDotxmlRoute
+  '/posts-sitemap.xml': typeof PostsSitemapDotxmlRoute
+  '/preview': typeof PreviewRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale': typeof FrontendLocaleRouteWithChildren
+  '/$locale/$slug': typeof FrontendLocaleSlugRoute
+  '/$locale/search': typeof FrontendLocaleSearchRoute
   '/admin/$': typeof PayloadAdminSplatRoute
   '/api/$': typeof PayloadApiSplatRoute
+  '/$locale/': typeof FrontendLocaleIndexRoute
   '/admin/': typeof PayloadAdminIndexRoute
+  '/$locale/posts/$slug': typeof FrontendLocalePostsSlugRoute
+  '/$locale/posts/': typeof FrontendLocalePostsIndexRoute
+  '/$locale/posts/page/$pageNumber': typeof FrontendLocalePostsPagePageNumberRoute
 }
 export interface FileRoutesByTo {
   '/': typeof FrontendIndexRoute
+  '/exit-preview': typeof ExitPreviewRoute
+  '/pages-sitemap.xml': typeof PagesSitemapDotxmlRoute
+  '/posts-sitemap.xml': typeof PostsSitemapDotxmlRoute
+  '/preview': typeof PreviewRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/$slug': typeof FrontendLocaleSlugRoute
+  '/$locale/search': typeof FrontendLocaleSearchRoute
   '/admin/$': typeof PayloadAdminSplatRoute
   '/api/$': typeof PayloadApiSplatRoute
+  '/$locale': typeof FrontendLocaleIndexRoute
   '/admin': typeof PayloadAdminIndexRoute
+  '/$locale/posts/$slug': typeof FrontendLocalePostsSlugRoute
+  '/$locale/posts': typeof FrontendLocalePostsIndexRoute
+  '/$locale/posts/page/$pageNumber': typeof FrontendLocalePostsPagePageNumberRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_frontend': typeof FrontendRouteWithChildren
   '/_payload': typeof PayloadRouteWithChildren
+  '/exit-preview': typeof ExitPreviewRoute
+  '/pages-sitemap.xml': typeof PagesSitemapDotxmlRoute
+  '/posts-sitemap.xml': typeof PostsSitemapDotxmlRoute
+  '/preview': typeof PreviewRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_frontend/$locale': typeof FrontendLocaleRouteWithChildren
   '/_frontend/': typeof FrontendIndexRoute
+  '/_frontend/$locale/$slug': typeof FrontendLocaleSlugRoute
+  '/_frontend/$locale/search': typeof FrontendLocaleSearchRoute
   '/_payload/admin/$': typeof PayloadAdminSplatRoute
   '/_payload/api/$': typeof PayloadApiSplatRoute
+  '/_frontend/$locale/': typeof FrontendLocaleIndexRoute
   '/_payload/admin/': typeof PayloadAdminIndexRoute
+  '/_frontend/$locale/posts/$slug': typeof FrontendLocalePostsSlugRoute
+  '/_frontend/$locale/posts/': typeof FrontendLocalePostsIndexRoute
+  '/_frontend/$locale/posts/page/$pageNumber': typeof FrontendLocalePostsPagePageNumberRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin/$' | '/api/$' | '/admin/'
+  fullPaths:
+    | '/'
+    | '/exit-preview'
+    | '/pages-sitemap.xml'
+    | '/posts-sitemap.xml'
+    | '/preview'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$locale'
+    | '/$locale/$slug'
+    | '/$locale/search'
+    | '/admin/$'
+    | '/api/$'
+    | '/$locale/'
+    | '/admin/'
+    | '/$locale/posts/$slug'
+    | '/$locale/posts/'
+    | '/$locale/posts/page/$pageNumber'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin/$' | '/api/$' | '/admin'
+  to:
+    | '/'
+    | '/exit-preview'
+    | '/pages-sitemap.xml'
+    | '/posts-sitemap.xml'
+    | '/preview'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$locale/$slug'
+    | '/$locale/search'
+    | '/admin/$'
+    | '/api/$'
+    | '/$locale'
+    | '/admin'
+    | '/$locale/posts/$slug'
+    | '/$locale/posts'
+    | '/$locale/posts/page/$pageNumber'
   id:
     | '__root__'
     | '/_frontend'
     | '/_payload'
+    | '/exit-preview'
+    | '/pages-sitemap.xml'
+    | '/posts-sitemap.xml'
+    | '/preview'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/_frontend/$locale'
     | '/_frontend/'
+    | '/_frontend/$locale/$slug'
+    | '/_frontend/$locale/search'
     | '/_payload/admin/$'
     | '/_payload/api/$'
+    | '/_frontend/$locale/'
     | '/_payload/admin/'
+    | '/_frontend/$locale/posts/$slug'
+    | '/_frontend/$locale/posts/'
+    | '/_frontend/$locale/posts/page/$pageNumber'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   FrontendRoute: typeof FrontendRouteWithChildren
   PayloadRoute: typeof PayloadRouteWithChildren
+  ExitPreviewRoute: typeof ExitPreviewRoute
+  PagesSitemapDotxmlRoute: typeof PagesSitemapDotxmlRoute
+  PostsSitemapDotxmlRoute: typeof PostsSitemapDotxmlRoute
+  PreviewRoute: typeof PreviewRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,12 +272,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PayloadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exit-preview': {
+      id: '/exit-preview'
+      path: '/exit-preview'
+      fullPath: '/exit-preview'
+      preLoaderRoute: typeof ExitPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages-sitemap.xml': {
+      id: '/pages-sitemap.xml'
+      path: '/pages-sitemap.xml'
+      fullPath: '/pages-sitemap.xml'
+      preLoaderRoute: typeof PagesSitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts-sitemap.xml': {
+      id: '/posts-sitemap.xml'
+      path: '/posts-sitemap.xml'
+      fullPath: '/posts-sitemap.xml'
+      preLoaderRoute: typeof PostsSitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preview': {
+      id: '/preview'
+      path: '/preview'
+      fullPath: '/preview'
+      preLoaderRoute: typeof PreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_frontend/': {
       id: '/_frontend/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof FrontendIndexRouteImport
       parentRoute: typeof FrontendRoute
+    }
+    '/_frontend/$locale': {
+      id: '/_frontend/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof FrontendLocaleRouteImport
+      parentRoute: typeof FrontendRoute
+    }
+    '/_frontend/$locale/': {
+      id: '/_frontend/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof FrontendLocaleIndexRouteImport
+      parentRoute: typeof FrontendLocaleRoute
+    }
+    '/_frontend/$locale/$slug': {
+      id: '/_frontend/$locale/$slug'
+      path: '/$slug'
+      fullPath: '/$locale/$slug'
+      preLoaderRoute: typeof FrontendLocaleSlugRouteImport
+      parentRoute: typeof FrontendLocaleRoute
+    }
+    '/_frontend/$locale/search': {
+      id: '/_frontend/$locale/search'
+      path: '/search'
+      fullPath: '/$locale/search'
+      preLoaderRoute: typeof FrontendLocaleSearchRouteImport
+      parentRoute: typeof FrontendLocaleRoute
     }
     '/_payload/admin/': {
       id: '/_payload/admin/'
@@ -130,14 +370,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PayloadApiSplatRouteImport
       parentRoute: typeof PayloadRoute
     }
+    '/_frontend/$locale/posts/': {
+      id: '/_frontend/$locale/posts/'
+      path: '/posts'
+      fullPath: '/$locale/posts/'
+      preLoaderRoute: typeof FrontendLocalePostsIndexRouteImport
+      parentRoute: typeof FrontendLocaleRoute
+    }
+    '/_frontend/$locale/posts/$slug': {
+      id: '/_frontend/$locale/posts/$slug'
+      path: '/posts/$slug'
+      fullPath: '/$locale/posts/$slug'
+      preLoaderRoute: typeof FrontendLocalePostsSlugRouteImport
+      parentRoute: typeof FrontendLocaleRoute
+    }
+    '/_frontend/$locale/posts/page/$pageNumber': {
+      id: '/_frontend/$locale/posts/page/$pageNumber'
+      path: '/posts/page/$pageNumber'
+      fullPath: '/$locale/posts/page/$pageNumber'
+      preLoaderRoute: typeof FrontendLocalePostsPagePageNumberRouteImport
+      parentRoute: typeof FrontendLocaleRoute
+    }
   }
 }
 
+interface FrontendLocaleRouteChildren {
+  FrontendLocaleSlugRoute: typeof FrontendLocaleSlugRoute
+  FrontendLocaleSearchRoute: typeof FrontendLocaleSearchRoute
+  FrontendLocaleIndexRoute: typeof FrontendLocaleIndexRoute
+  FrontendLocalePostsSlugRoute: typeof FrontendLocalePostsSlugRoute
+  FrontendLocalePostsIndexRoute: typeof FrontendLocalePostsIndexRoute
+  FrontendLocalePostsPagePageNumberRoute: typeof FrontendLocalePostsPagePageNumberRoute
+}
+
+const FrontendLocaleRouteChildren: FrontendLocaleRouteChildren = {
+  FrontendLocaleSlugRoute: FrontendLocaleSlugRoute,
+  FrontendLocaleSearchRoute: FrontendLocaleSearchRoute,
+  FrontendLocaleIndexRoute: FrontendLocaleIndexRoute,
+  FrontendLocalePostsSlugRoute: FrontendLocalePostsSlugRoute,
+  FrontendLocalePostsIndexRoute: FrontendLocalePostsIndexRoute,
+  FrontendLocalePostsPagePageNumberRoute:
+    FrontendLocalePostsPagePageNumberRoute,
+}
+
+const FrontendLocaleRouteWithChildren = FrontendLocaleRoute._addFileChildren(
+  FrontendLocaleRouteChildren,
+)
+
 interface FrontendRouteChildren {
+  FrontendLocaleRoute: typeof FrontendLocaleRouteWithChildren
   FrontendIndexRoute: typeof FrontendIndexRoute
 }
 
 const FrontendRouteChildren: FrontendRouteChildren = {
+  FrontendLocaleRoute: FrontendLocaleRouteWithChildren,
   FrontendIndexRoute: FrontendIndexRoute,
 }
 
@@ -163,6 +449,12 @@ const PayloadRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   FrontendRoute: FrontendRouteWithChildren,
   PayloadRoute: PayloadRouteWithChildren,
+  ExitPreviewRoute: ExitPreviewRoute,
+  PagesSitemapDotxmlRoute: PagesSitemapDotxmlRoute,
+  PostsSitemapDotxmlRoute: PostsSitemapDotxmlRoute,
+  PreviewRoute: PreviewRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,0 +1,37 @@
+import React, { createContext, useCallback, use, useState } from "react";
+
+import canUseDOM from "#/utilities/canUseDOM";
+
+import { getImplicitPreference, themeLocalStorageKey } from "./shared";
+import type { Theme, ThemeContextType } from "./types";
+
+const initialContext: ThemeContextType = {
+  setTheme: () => null,
+  theme: undefined,
+};
+
+const ThemeContext = createContext(initialContext);
+
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  // initThemeScript has already set data-theme from the stored or implicit preference before hydration
+  const [theme, setThemeState] = useState<Theme | undefined>(
+    canUseDOM ? (document.documentElement.getAttribute("data-theme") as Theme) : undefined,
+  );
+
+  const setTheme = useCallback((themeToSet: Theme | null) => {
+    if (themeToSet === null) {
+      window.localStorage.removeItem(themeLocalStorageKey);
+      const implicitPreference = getImplicitPreference();
+      document.documentElement.setAttribute("data-theme", implicitPreference || "");
+      if (implicitPreference) setThemeState(implicitPreference);
+    } else {
+      setThemeState(themeToSet);
+      window.localStorage.setItem(themeLocalStorageKey, themeToSet);
+      document.documentElement.setAttribute("data-theme", themeToSet);
+    }
+  }, []);
+
+  return <ThemeContext value={{ setTheme, theme }}>{children}</ThemeContext>;
+};
+
+export const useTheme = (): ThemeContextType => use(ThemeContext);

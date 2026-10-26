@@ -1,44 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeader } from "@tanstack/react-start/server";
 
-export const Route = createFileRoute('/_frontend/')({
-  component: HomePage,
-  head: () => ({
-    meta: [{ title: 'Payload TanStack Blank Template' }],
-  }),
-})
+import { defaultLocale, isLocale } from "#/i18n/locales";
 
-function HomePage() {
-  return (
-    <div className="home" data-test="payload-ui-barrel-sentinel">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <img
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        <h1>Welcome to your new project.</h1>
-        <div className="links">
-          <a className="admin" href="/admin" rel="noopener noreferrer" target="_blank">
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <code className="codeLink">src/app/_frontend/index.tsx</code>
-      </div>
-    </div>
-  )
-}
+/** Picks the first supported language from the Accept-Language header */
+const getPreferredLocale = createServerFn({ method: "GET" }).handler(() => {
+  const preferred = (getRequestHeader("accept-language") ?? "")
+    .split(",")
+    .map((part) => part.split(";")[0]!.trim().toLowerCase().split("-")[0])
+    // Norwegian browsers often send `no` or `nn` rather than `nb`
+    .map((language) => (language === "no" || language === "nn" ? "nb" : language))
+    .find(isLocale);
+
+  return preferred ?? defaultLocale;
+});
+
+export const Route = createFileRoute("/_frontend/")({
+  beforeLoad: async () => {
+    throw redirect({ to: "/$locale", params: { locale: await getPreferredLocale() } });
+  },
+});

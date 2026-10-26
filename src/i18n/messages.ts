@@ -1,0 +1,71 @@
+import type { AppLocale } from "./locales";
+
+const nb = {
+  author: "Forfatter",
+  datePublished: "Publisert",
+  fieldRequired: "Dette feltet er påkrevd",
+  goHome: "Gå til forsiden",
+  language: "Språk",
+  loading: "Laster, vennligst vent …",
+  moreResults: "Flere sider",
+  next: "Neste",
+  nextPage: "Gå til neste side",
+  noImage: "Ingen bilde",
+  noResults: "Ingen treff.",
+  notFoundText: "Denne siden finnes ikke.",
+  notFoundTitle: "404",
+  pageNumber: (page: number) => `Side ${page}`,
+  post: "innlegg",
+  posts: "Innlegg",
+  postsPlural: "innlegg",
+  previous: "Forrige",
+  previousPage: "Gå til forrige side",
+  search: "Søk",
+  searchNoResults: "Søket ga ingen treff.",
+  showing: (start: number, end: number, total: number, label: string) =>
+    `Viser ${start}${end > 0 ? ` – ${end}` : ""} av ${total} ${label}`,
+  somethingWentWrong: "Noe gikk galt.",
+  submit: "Send",
+  theme: "Tema",
+  themeAuto: "Automatisk",
+  themeDark: "Mørkt",
+  themeLight: "Lyst",
+  untitledCategory: "Kategori uten navn",
+};
+
+const en: typeof nb = {
+  author: "Author",
+  datePublished: "Date Published",
+  fieldRequired: "This field is required",
+  goHome: "Go home",
+  language: "Language",
+  loading: "Loading, please wait...",
+  moreResults: "More pages",
+  next: "Next",
+  nextPage: "Go to next page",
+  noImage: "No image",
+  noResults: "No results found.",
+  notFoundText: "This page could not be found.",
+  notFoundTitle: "404",
+  pageNumber: (page: number) => `Page ${page}`,
+  post: "Post",
+  posts: "Posts",
+  postsPlural: "Posts",
+  previous: "Previous",
+  previousPage: "Go to previous page",
+  search: "Search",
+  searchNoResults: "Search produced no results.",
+  showing: (start: number, end: number, total: number, label: string) =>
+    `Showing ${start}${end > 0 ? ` - ${end}` : ""} of ${total} ${label}`,
+  somethingWentWrong: "Something went wrong.",
+  submit: "Submit",
+  theme: "Theme",
+  themeAuto: "Auto",
+  themeDark: "Dark",
+  themeLight: "Light",
+  untitledCategory: "Untitled category",
+};
+
+export type Messages = typeof nb;
+
+export const messages: Record<AppLocale, Messages> = { en, nb };

@@ -1,0 +1,41 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y"],
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [
+    ".tanstack/",
+    "dist/",
+    "src/app/_payload/importMap.js",
+    "src/migrations/",
+    "src/payload-types.ts",
+    "src/routeTree.gen.ts"
+  ],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "typescript/ban-ts-comment": "warn",
+    "typescript/no-empty-object-type": "warn",
+    "typescript/no-explicit-any": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^(_|ignore)",
+        "destructuredArrayIgnorePattern": "^_",
+        "ignoreRestSiblings": false,
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["tests/int/**"],
+      "plugins": ["vitest"]
+    }
+  ]
+}
