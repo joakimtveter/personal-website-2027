@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, use, useState } from "react";
+import { createContext, useCallback, use, useState, ReactNode } from "react";
 
 import canUseDOM from "#/utilities/canUseDOM";
 
@@ -12,7 +12,7 @@ const initialContext: ThemeContextType = {
 
 const ThemeContext = createContext(initialContext);
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   // initThemeScript has already set data-theme from the stored or implicit preference before hydration
   const [theme, setThemeState] = useState<Theme | undefined>(
     canUseDOM ? (document.documentElement.getAttribute("data-theme") as Theme) : undefined,

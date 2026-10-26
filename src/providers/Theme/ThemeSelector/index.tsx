@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from "react";
+import { FC, useSyncExternalStore } from "react";
 
 import {
   Select,
@@ -27,7 +27,7 @@ const getPreference = () => window.localStorage.getItem(themeLocalStorageKey) ??
 // No value on the server, so the stored preference only shows up after hydration
 const getServerPreference = () => null;
 
-export const ThemeSelector: React.FC = () => {
+export const ThemeSelector: FC = () => {
   const { setTheme } = useTheme();
   const value = useSyncExternalStore(subscribe, getPreference, getServerPreference);
   const t = useMessages();

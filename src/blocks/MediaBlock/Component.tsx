@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 
 import RichText from "#/components/RichText";
 import type { MediaBlock as MediaBlockProps } from "#/payload-types";
 import { cn } from "#/utilities/ui";
 
-import { Media } from "../../components/Media";
+import { Media } from "#/components/Media";
 
 type Props = MediaBlockProps & {
   breakout?: boolean;
@@ -16,7 +16,7 @@ type Props = MediaBlockProps & {
   disableInnerContainer?: boolean;
 };
 
-export const MediaBlock: React.FC<Props> = (props) => {
+export const MediaBlock: FC<Props> = (props) => {
   const {
     captionClassName,
     className,

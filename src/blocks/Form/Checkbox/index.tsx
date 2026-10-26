@@ -1,34 +1,25 @@
 import type { CheckboxField } from "@payloadcms/plugin-form-builder/types";
-import React from "react";
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
-import { useFormContext } from "react-hook-form";
+import { FC } from "react";
 
 import { Checkbox as CheckboxUi } from "#/components/ui/checkbox";
 import { Label } from "#/components/ui/label";
 
 import { Error } from "../Error";
+import { useFieldContext } from "../form";
 import { Width } from "../Width";
 
-export const Checkbox: React.FC<
-  CheckboxField & {
-    errors: Partial<FieldErrorsImpl>;
-    register: UseFormRegister<FieldValues>;
-  }
-> = ({ name, defaultValue, errors, label, register, required, width }) => {
-  const props = register(name, { required: required });
-  const { setValue } = useFormContext();
+export const Checkbox: FC<CheckboxField> = ({ name, label, required, width }) => {
+  const field = useFieldContext<boolean>();
 
   return (
     <Width width={width}>
       <div className="flex items-center gap-2">
         <CheckboxUi
-          // Unset defaults are stored as null, which would leave the checkbox uncontrolled at first
-          defaultChecked={Boolean(defaultValue)}
+          aria-invalid={!field.state.meta.isValid}
+          checked={field.state.value}
           id={name}
-          {...props}
-          onCheckedChange={(checked) => {
-            setValue(props.name, checked);
-          }}
+          name={name}
+          onCheckedChange={(checked) => field.handleChange(checked)}
         />
         <Label htmlFor={name}>
           {required && (
@@ -39,7 +30,7 @@ export const Checkbox: React.FC<
           {label}
         </Label>
       </div>
-      {errors[name] && <Error name={name} />}
+      <Error />
     </Width>
   );
 };

@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 
 import { CollectionArchive } from "#/components/CollectionArchive";
 import RichText from "#/components/RichText";
 import type { Post } from "#/payload-types";
 import type { ArchiveBlockWithDocs } from "#/server/content.functions";
 
-export const ArchiveBlock: React.FC<
+export const ArchiveBlock: FC<
   ArchiveBlockWithDocs & {
     id?: string;
   }

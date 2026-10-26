@@ -1,8 +1,8 @@
-import * as React from "react";
+import { FC, HTMLAttributes } from "react";
 
 import { cn } from "#/utilities/ui";
 
-const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const Card: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return (
     <div
       data-slot="card"
@@ -12,7 +12,7 @@ const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...pr
   );
 };
 
-const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const CardHeader: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return (
     <div
       data-slot="card-header"
@@ -22,7 +22,7 @@ const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className,
   );
 };
 
-const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
+const CardTitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({
   children,
   className,
   ...props
@@ -38,7 +38,7 @@ const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
-const CardDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({
+const CardDescription: FC<HTMLAttributes<HTMLParagraphElement>> = ({
   className,
   ...props
 }) => {
@@ -51,11 +51,11 @@ const CardDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({
   );
 };
 
-const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const CardContent: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return <div data-slot="card-content" className={cn("p-6 pt-0", className)} {...props} />;
 };
 
-const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const CardFooter: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return (
     <div
       data-slot="card-footer"

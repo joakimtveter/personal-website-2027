@@ -1,19 +1,16 @@
 import type { EmailField } from "@payloadcms/plugin-form-builder/types";
-import React from "react";
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
+import { FC } from "react";
 
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
 
 import { Error } from "../Error";
+import { useFieldContext } from "../form";
 import { Width } from "../Width";
 
-export const Email: React.FC<
-  EmailField & {
-    errors: Partial<FieldErrorsImpl>;
-    register: UseFormRegister<FieldValues>;
-  }
-> = ({ name, defaultValue, errors, label, register, required, width }) => {
+export const Email: FC<EmailField> = ({ name, label, required, width }) => {
+  const field = useFieldContext<string>();
+
   return (
     <Width width={width}>
       <Label htmlFor={name}>
@@ -26,13 +23,15 @@ export const Email: React.FC<
         )}
       </Label>
       <Input
-        defaultValue={defaultValue}
+        aria-invalid={!field.state.meta.isValid}
         id={name}
+        name={name}
+        onBlur={field.handleBlur}
+        onChange={(e) => field.handleChange(e.target.value)}
         type="text"
-        {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
+        value={field.state.value}
       />
-
-      {errors[name] && <Error name={name} />}
+      <Error />
     </Width>
   );
 };

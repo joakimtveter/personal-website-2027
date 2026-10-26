@@ -15,7 +15,7 @@ pnpm dev                 # Vite dev server on http://localhost:3000 (admin at /a
 pnpm devsafe             # same, after wiping dist/
 pnpm build               # production build (payload build -> dist/)
 pnpm start               # serve the production build with srvx
-pnpm lint                # oxlint (config in .oxlintrc.json)
+pnpm lint                # oxlint, type-aware via oxlint-tsgolint (config in .oxlintrc.json); warnings fail
 npx oxfmt                # formatter (no script; config in oxfmt.config.ts)
 
 pnpm test                # int + e2e

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 import { cssVariables } from "#/cssVariables";
 import type { Media } from "#/payload-types";
@@ -31,7 +31,7 @@ const getSrcSet = (resource: Media) => {
  * as `srcset` candidates. With `fill`, the image covers its positioned container and respects
  * the focal point chosen in the admin panel.
  */
-export const ImageMedia: React.FC<MediaProps> = (props) => {
+export const ImageMedia: FC<MediaProps> = (props) => {
   const {
     alt: altFromProps,
     fill,

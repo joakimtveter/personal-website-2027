@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 
 import { useMessages } from "#/i18n/useLocale";
 
-export const PageRange: React.FC<{
+export const PageRange: FC<{
   className?: string;
   currentPage?: number;
   limit?: number;

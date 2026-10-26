@@ -20,7 +20,7 @@ export const SeedButton: React.FC = () => {
   const [error, setError] = useState<null | string>(null);
 
   const handleClick = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
       if (seeded) {
@@ -38,36 +38,24 @@ export const SeedButton: React.FC = () => {
 
       setLoading(true);
 
-      try {
-        toast.promise(
-          new Promise((resolve, reject) => {
-            try {
-              fetch("/api/seed", { method: "POST", credentials: "include" })
-                .then((res) => {
-                  if (res.ok) {
-                    resolve(true);
-                    setSeeded(true);
-                  } else {
-                    reject("An error occurred while seeding.");
-                  }
-                })
-                .catch((error) => {
-                  reject(error);
-                });
-            } catch (error) {
-              reject(error);
-            }
-          }),
-          {
-            loading: "Seeding with data....",
-            success: <SuccessMessage />,
-            error: "An error occurred while seeding.",
-          },
-        );
-      } catch (err) {
-        const error = err instanceof Error ? err.message : String(err);
-        setError(error);
-      }
+      const seed = fetch("/api/seed", { method: "POST", credentials: "include" }).then((res) => {
+        if (!res.ok) throw new Error("An error occurred while seeding.");
+        setSeeded(true);
+      });
+
+      toast.promise(seed, {
+        loading: "Seeding with data....",
+        success: <SuccessMessage />,
+        error: "An error occurred while seeding.",
+      });
+
+      void seed
+        .catch((err: unknown) => {
+          setError(err instanceof Error ? err.message : String(err));
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
     [loading, seeded, error],
   );

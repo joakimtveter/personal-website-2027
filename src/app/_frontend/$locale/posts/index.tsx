@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
+import { FC } from "react";
 
 import { CollectionArchive } from "#/components/CollectionArchive";
 import { PageRange } from "#/components/PageRange";
@@ -26,7 +26,7 @@ function PostsPage() {
   return <PostsArchive posts={Route.useLoaderData()} />;
 }
 
-export const PostsArchive: React.FC<{ posts: Awaited<ReturnType<typeof getPosts>> }> = ({
+export const PostsArchive: FC<{ posts: Awaited<ReturnType<typeof getPosts>> }> = ({
   posts,
 }) => {
   const t = useMessages();

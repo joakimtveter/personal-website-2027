@@ -1,5 +1,4 @@
-import React from "react";
-
+import { FC } from "react";
 import { HighImpactHero } from "#/heros/HighImpact";
 import { LowImpactHero } from "#/heros/LowImpact";
 import { MediumImpactHero } from "#/heros/MediumImpact";
@@ -11,7 +10,7 @@ const heroes = {
   mediumImpact: MediumImpactHero,
 };
 
-export const RenderHero: React.FC<Page["hero"]> = (props) => {
+export const RenderHero: FC<Page["hero"]> = (props) => {
   const { type } = props || {};
 
   if (!type || type === "none") return null;

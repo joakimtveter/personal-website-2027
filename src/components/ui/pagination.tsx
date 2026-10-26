@@ -1,12 +1,11 @@
+import { ComponentProps, FC, HTMLAttributes, Ref } from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
-import * as React from "react";
-
 import type { ButtonProps } from "#/components/ui/button";
 import { buttonVariants } from "#/components/ui/button";
 import { useMessages } from "#/i18n/useLocale";
 import { cn } from "#/utilities/ui";
 
-const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
+const Pagination = ({ className, ...props }: ComponentProps<"nav">) => (
   <nav
     aria-label="pagination"
     className={cn("mx-auto flex w-full justify-center", className)}
@@ -15,20 +14,20 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   />
 );
 
-const PaginationContent: React.FC<
-  { ref?: React.Ref<HTMLUListElement> } & React.HTMLAttributes<HTMLUListElement>
+const PaginationContent: FC<
+  { ref?: Ref<HTMLUListElement> } & HTMLAttributes<HTMLUListElement>
 > = ({ className, ref, ...props }) => (
   <ul className={cn("flex flex-row items-center gap-1", className)} ref={ref} {...props} />
 );
 
-const PaginationItem: React.FC<
-  { ref?: React.Ref<HTMLLIElement> } & React.HTMLAttributes<HTMLLIElement>
+const PaginationItem: FC<
+  { ref?: Ref<HTMLLIElement> } & HTMLAttributes<HTMLLIElement>
 > = ({ className, ref, ...props }) => <li className={cn("", className)} ref={ref} {...props} />;
 
 type PaginationLinkProps = {
   isActive?: boolean;
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"button">;
+  ComponentProps<"button">;
 
 const PaginationLink = ({ className, isActive, size = "icon", ...props }: PaginationLinkProps) => (
   <button
@@ -47,7 +46,7 @@ const PaginationLink = ({ className, isActive, size = "icon", ...props }: Pagina
 const PaginationPrevious = ({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => {
+}: ComponentProps<typeof PaginationLink>) => {
   const t = useMessages();
   return (
     <PaginationLink
@@ -62,7 +61,7 @@ const PaginationPrevious = ({
   );
 };
 
-const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => {
+const PaginationNext = ({ className, ...props }: ComponentProps<typeof PaginationLink>) => {
   const t = useMessages();
   return (
     <PaginationLink
@@ -77,7 +76,7 @@ const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof Pag
   );
 };
 
-const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<"span">) => {
+const PaginationEllipsis = ({ className, ...props }: ComponentProps<"span">) => {
   const t = useMessages();
   return (
     <span

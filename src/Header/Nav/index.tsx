@@ -1,13 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { SearchIcon } from "lucide-react";
-import React from "react";
-
 import { CMSLink } from "#/components/Link";
 import { LocaleSwitcher } from "#/components/LocaleSwitcher";
 import { useLocale, useMessages } from "#/i18n/useLocale";
 import type { Header as HeaderType } from "#/payload-types";
+import {FC} from "react";
 
-export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+export const HeaderNav: FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || [];
   const locale = useLocale();
   const t = useMessages();

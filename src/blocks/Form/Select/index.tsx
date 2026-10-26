@@ -1,7 +1,5 @@
 import type { SelectField } from "@payloadcms/plugin-form-builder/types";
-import React from "react";
-import type { Control, FieldErrorsImpl } from "react-hook-form";
-import { Controller } from "react-hook-form";
+import { FC } from "react";
 
 import { Label } from "#/components/ui/label";
 import {
@@ -13,14 +11,13 @@ import {
 } from "#/components/ui/select";
 
 import { Error } from "../Error";
+import { useFieldContext } from "../form";
 import { Width } from "../Width";
 
-export const Select: React.FC<
-  SelectField & {
-    control: Control;
-    errors: Partial<FieldErrorsImpl>;
-  }
-> = ({ name, control, errors, label, options, required, width, defaultValue }) => {
+export const Select: FC<SelectField> = ({ name, label, options, required, width }) => {
+  const field = useFieldContext<string>();
+  const controlledValue = options.find((t) => t.value === field.state.value);
+
   return (
     <Width width={width}>
       <Label htmlFor={name}>
@@ -31,37 +28,31 @@ export const Select: React.FC<
           </span>
         )}
       </Label>
-      <Controller
-        control={control}
-        defaultValue={defaultValue}
+      <SelectComponent
+        items={options}
         name={name}
-        render={({ field: { onChange, value } }) => {
-          const controlledValue = options.find((t) => t.value === value);
-
-          return (
-            <SelectComponent
-              items={options}
-              onValueChange={(val) => onChange(val)}
-              value={controlledValue?.value ?? null}
-            >
-              <SelectTrigger className="w-full" id={name}>
-                <SelectValue placeholder={label} />
-              </SelectTrigger>
-              <SelectContent>
-                {options.map(({ label, value }) => {
-                  return (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </SelectComponent>
-          );
-        }}
-        rules={{ required }}
-      />
-      {errors[name] && <Error name={name} />}
+        onValueChange={(val) => field.handleChange(val ?? "")}
+        value={controlledValue?.value ?? null}
+      >
+        <SelectTrigger
+          aria-invalid={!field.state.meta.isValid}
+          className="w-full"
+          id={name}
+          onBlur={field.handleBlur}
+        >
+          <SelectValue placeholder={label} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(({ label, value }) => {
+            return (
+              <SelectItem key={value} value={value}>
+                {label}
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </SelectComponent>
+      <Error />
     </Width>
   );
 };

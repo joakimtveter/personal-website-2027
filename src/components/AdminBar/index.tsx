@@ -1,7 +1,7 @@
 import type { PayloadAdminBarProps, PayloadMeUser } from "@payloadcms/admin-bar";
 import { PayloadAdminBar } from "@payloadcms/admin-bar";
 import { useRouter, useRouterState } from "@tanstack/react-router";
-import React, { useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 import { useLocale } from "#/i18n/useLocale";
 import { getClientSideURL } from "#/utilities/getURL";
@@ -22,9 +22,9 @@ const collectionLabels = {
   },
 };
 
-const Title: React.FC = () => <span>Dashboard</span>;
+const Title: FC = () => <span>Dashboard</span>;
 
-export const AdminBar: React.FC<{
+export const AdminBar: FC<{
   adminBarProps?: PayloadAdminBarProps;
 }> = (props) => {
   const { adminBarProps } = props || {};
@@ -35,7 +35,7 @@ export const AdminBar: React.FC<{
   const [show, setShow] = useState(false);
   const collection: keyof typeof collectionLabels = segment === "posts" ? "posts" : "pages";
 
-  const onAuthChange = React.useCallback((user: PayloadMeUser) => {
+  const onAuthChange = useCallback((user: PayloadMeUser) => {
     setShow(Boolean(user?.id));
   }, []);
 

@@ -1,10 +1,9 @@
-import React from "react";
-
+import { FC, ReactNode } from "react";
 import { HeaderThemeProvider } from "./HeaderTheme";
 import { ThemeProvider } from "./Theme";
 
-export const Providers: React.FC<{
-  children: React.ReactNode;
+export const Providers: FC<{
+  children: ReactNode;
 }> = ({ children }) => {
   return (
     <ThemeProvider>

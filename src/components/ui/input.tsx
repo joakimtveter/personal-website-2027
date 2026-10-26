@@ -1,8 +1,8 @@
-import * as React from "react";
+import { FC, InputHTMLAttributes } from "react";
 
 import { cn } from "#/utilities/ui";
 
-const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({
+const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
   className,
   type,
   ...props

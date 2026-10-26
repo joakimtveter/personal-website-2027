@@ -1,6 +1,6 @@
+import { FC } from "react";
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
-import * as React from "react";
 
 import { cn } from "#/utilities/ui";
 
@@ -10,11 +10,11 @@ import { cn } from "#/utilities/ui";
  */
 const Select = SelectPrimitive.Root;
 
-const SelectGroup: React.FC<SelectPrimitive.Group.Props> = (props) => {
+const SelectGroup: FC<SelectPrimitive.Group.Props> = (props) => {
   return <SelectPrimitive.Group data-slot="select-group" {...props} />;
 };
 
-const SelectValue: React.FC<SelectPrimitive.Value.Props> = ({ className, ...props }) => {
+const SelectValue: FC<SelectPrimitive.Value.Props> = ({ className, ...props }) => {
   return (
     <SelectPrimitive.Value
       data-slot="select-value"
@@ -24,7 +24,7 @@ const SelectValue: React.FC<SelectPrimitive.Value.Props> = ({ className, ...prop
   );
 };
 
-const SelectTrigger: React.FC<SelectPrimitive.Trigger.Props> = ({
+const SelectTrigger: FC<SelectPrimitive.Trigger.Props> = ({
   children,
   className,
   ...props
@@ -48,7 +48,7 @@ type SelectContentProps = SelectPrimitive.Popup.Props &
   Pick<SelectPrimitive.Positioner.Props, "align" | "alignItemWithTrigger" | "side" | "sideOffset">;
 
 /** Opens below the trigger by default; set `alignItemWithTrigger` to overlay the selected item instead */
-const SelectContent: React.FC<SelectContentProps> = ({
+const SelectContent: FC<SelectContentProps> = ({
   align = "start",
   alignItemWithTrigger = false,
   children,
@@ -85,7 +85,7 @@ const SelectContent: React.FC<SelectContentProps> = ({
   );
 };
 
-const SelectLabel: React.FC<SelectPrimitive.GroupLabel.Props> = ({ className, ...props }) => {
+const SelectLabel: FC<SelectPrimitive.GroupLabel.Props> = ({ className, ...props }) => {
   return (
     <SelectPrimitive.GroupLabel
       data-slot="select-label"
@@ -95,7 +95,7 @@ const SelectLabel: React.FC<SelectPrimitive.GroupLabel.Props> = ({ className, ..
   );
 };
 
-const SelectItem: React.FC<SelectPrimitive.Item.Props> = ({ children, className, ...props }) => {
+const SelectItem: FC<SelectPrimitive.Item.Props> = ({ children, className, ...props }) => {
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
@@ -115,7 +115,7 @@ const SelectItem: React.FC<SelectPrimitive.Item.Props> = ({ children, className,
   );
 };
 
-const SelectSeparator: React.FC<SelectPrimitive.Separator.Props> = ({ className, ...props }) => {
+const SelectSeparator: FC<SelectPrimitive.Separator.Props> = ({ className, ...props }) => {
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
@@ -125,7 +125,7 @@ const SelectSeparator: React.FC<SelectPrimitive.Separator.Props> = ({ className,
   );
 };
 
-const SelectScrollUpButton: React.FC<SelectPrimitive.ScrollUpArrow.Props> = ({
+const SelectScrollUpButton: FC<SelectPrimitive.ScrollUpArrow.Props> = ({
   className,
   ...props
 }) => {
@@ -143,7 +143,7 @@ const SelectScrollUpButton: React.FC<SelectPrimitive.ScrollUpArrow.Props> = ({
   );
 };
 
-const SelectScrollDownButton: React.FC<SelectPrimitive.ScrollDownArrow.Props> = ({
+const SelectScrollDownButton: FC<SelectPrimitive.ScrollDownArrow.Props> = ({
   className,
   ...props
 }) => {

@@ -1,11 +1,11 @@
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import clsx from "clsx";
-import React from "react";
+import React, { FC } from "react";
 
 import RichText from "#/components/RichText";
 import type { Post } from "#/payload-types";
 
-import { Card } from "../../components/Card";
+import { Card } from "#/components/Card";
 
 export type RelatedPostsProps = {
   className?: string;
@@ -13,7 +13,7 @@ export type RelatedPostsProps = {
   introContent?: SerializedEditorState;
 };
 
-export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
+export const RelatedPosts: FC<RelatedPostsProps> = (props) => {
   const { className, docs, introContent } = props;
 
   return (

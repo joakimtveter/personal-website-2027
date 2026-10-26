@@ -1,16 +1,11 @@
-import * as React from "react";
-import { useFormContext } from "react-hook-form";
+import { FC } from "react";
+import { useFieldContext } from "../form";
 
-import { useMessages } from "#/i18n/useLocale";
+export const Error: FC = () => {
+  const field = useFieldContext<unknown>();
+  const [error] = field.state.meta.errors;
 
-export const Error = ({ name }: { name: string }) => {
-  const {
-    formState: { errors },
-  } = useFormContext();
-  const t = useMessages();
-  return (
-    <div className="mt-2 text-sm text-red-500">
-      {(errors[name]?.message as string) || t.fieldRequired}
-    </div>
-  );
+  if (!error) return null;
+
+  return <div className="mt-2 text-sm text-red-500">{String(error)}</div>;
 };

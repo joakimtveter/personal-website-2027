@@ -1,5 +1,5 @@
 import { useRouterState } from "@tanstack/react-router";
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { Logo } from "#/components/Logo/Logo";
@@ -9,7 +9,7 @@ import { useHeaderTheme } from "#/providers/HeaderTheme";
 
 import { HeaderNav } from "./Nav";
 
-export const Header: React.FC<{ data: HeaderType }> = ({ data }) => {
+export const Header: FC<{ data: HeaderType }> = ({ data }) => {
   const { headerTheme, setHeaderTheme } = useHeaderTheme();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const locale = useLocale();

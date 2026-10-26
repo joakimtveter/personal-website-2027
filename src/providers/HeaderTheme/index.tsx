@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, use, useState } from "react";
+import { createContext, useCallback, use, useState, ReactNode } from "react";
 
 import type { Theme } from "#/providers/Theme/types";
 
@@ -14,7 +14,7 @@ const initialContext: ContextType = {
 
 const HeaderThemeContext = createContext(initialContext);
 
-export const HeaderThemeProvider = ({ children }: { children: React.ReactNode }) => {
+export const HeaderThemeProvider = ({ children }: { children: ReactNode }) => {
   // Starts unset on both server and client so the header hydrates without a mismatch
   const [headerTheme, setThemeState] = useState<Theme | undefined | null>(undefined);
 

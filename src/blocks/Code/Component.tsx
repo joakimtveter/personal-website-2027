@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 import { Code } from "./Highlight";
 
@@ -12,7 +12,7 @@ type Props = CodeBlockProps & {
   className?: string;
 };
 
-export const CodeBlock: React.FC<Props> = ({ className, code, language }) => {
+export const CodeBlock: FC<Props> = ({ className, code, language }) => {
   return (
     <div className={[className, "not-prose"].filter(Boolean).join(" ")}>
       <Code code={code} language={language} />

@@ -8,7 +8,7 @@ import { defaultLocale, isLocale } from "#/i18n/locales";
 const getPreferredLocale = createServerFn({ method: "GET" }).handler(() => {
   const preferred = (getRequestHeader("accept-language") ?? "")
     .split(",")
-    .map((part) => part.split(";")[0]!.trim().toLowerCase().split("-")[0])
+    .map((part) => part.split(";")[0].trim().toLowerCase().split("-")[0])
     // Norwegian browsers often send `no` or `nn` rather than `nb`
     .map((language) => (language === "no" || language === "nn" ? "nb" : language))
     .find(isLocale);

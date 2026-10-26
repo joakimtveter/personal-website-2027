@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import * as React from "react";
+import { ComponentProps, FC } from "react";
 
 import { cn } from "#/utilities/ui";
 
@@ -9,7 +9,7 @@ const labelVariants = cva(
 );
 
 // Base UI has no standalone label primitive, so this is a plain <label>
-const Label: React.FC<React.ComponentProps<"label"> & VariantProps<typeof labelVariants>> = ({
+const Label: FC<ComponentProps<"label"> & VariantProps<typeof labelVariants>> = ({
   children,
   className,
   htmlFor,

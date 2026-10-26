@@ -1,10 +1,10 @@
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
 import { Check } from "lucide-react";
-import * as React from "react";
+import { FC } from "react";
 
 import { cn } from "#/utilities/ui";
 
-const Checkbox: React.FC<CheckboxPrimitive.Root.Props> = ({ className, ...props }) => (
+const Checkbox: FC<CheckboxPrimitive.Root.Props> = ({ className, ...props }) => (
   <CheckboxPrimitive.Root
     data-slot="checkbox"
     className={cn(

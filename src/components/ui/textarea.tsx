@@ -1,8 +1,7 @@
-import * as React from "react";
-
+import { FC, TextareaHTMLAttributes } from "react";
 import { cn } from "#/utilities/ui";
 
-const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = ({
+const Textarea: FC<TextareaHTMLAttributes<HTMLTextAreaElement>> = ({
   className,
   ...props
 }) => {

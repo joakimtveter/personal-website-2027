@@ -94,6 +94,48 @@ test.describe("Frontend", () => {
       .toBe("");
   });
 
+  test("validates and submits the contact form", async ({ page }) => {
+    // Answer the submission here so the test doesn't write to the database
+    let submission: unknown;
+    await page.route("**/api/form-submissions", async (route) => {
+      submission = route.request().postDataJSON();
+      await route.fulfill({ json: { doc: {} }, status: 201 });
+    });
+
+    await page.goto("http://localhost:3000/en/contact");
+    // Submitting before hydration would fall back to a native form submit
+    await page.waitForLoadState("networkidle");
+
+    const form = page.locator("form");
+    await form.getByRole("button", { name: "Submit" }).click();
+
+    // Full name, email and message are required; phone is optional
+    await expect(form.getByText("This field is required")).toHaveCount(3);
+    expect(submission).toBeUndefined();
+
+    await form.locator("#full-name").fill("Test Person");
+    await form.locator("#email").fill("not-an-email");
+    await form.locator("#message").fill("Hello");
+
+    // Errors re-validate on change once the form has been submitted
+    await expect(form.getByText("This field is required")).toHaveCount(0);
+    await expect(form.getByText("Enter a valid email address")).toBeVisible();
+
+    await form.locator("#email").fill("test@example.com");
+    await form.getByRole("button", { name: "Submit" }).click();
+
+    await expect(page.getByText("The contact form has been submitted successfully.")).toBeVisible();
+    expect(submission).toEqual({
+      form: expect.any(Number),
+      submissionData: [
+        { field: "full-name", value: "Test Person" },
+        { field: "email", value: "test@example.com" },
+        { field: "phone", value: "" },
+        { field: "message", value: "Hello" },
+      ],
+    });
+  });
+
   test.describe("post detail", () => {
     test.beforeAll(async () => {
       await seedRelatedPosts();

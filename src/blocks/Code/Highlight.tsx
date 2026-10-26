@@ -1,5 +1,5 @@
 import { Highlight, themes } from "prism-react-renderer";
-import React from "react";
+import { FC } from "react";
 
 import { CopyButton } from "./CopyButton";
 
@@ -8,7 +8,7 @@ type Props = {
   language?: string;
 };
 
-export const Code: React.FC<Props> = ({ code, language = "" }) => {
+export const Code: FC<Props> = ({ code, language = "" }) => {
   if (!code) return null;
 
   return (

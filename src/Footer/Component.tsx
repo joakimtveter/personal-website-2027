@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { CMSLink } from "#/components/Link";
@@ -7,7 +7,7 @@ import { useLocale } from "#/i18n/useLocale";
 import type { Footer as FooterType } from "#/payload-types";
 import { ThemeSelector } from "#/providers/Theme/ThemeSelector";
 
-export const Footer: React.FC<{ data: FooterType }> = ({ data }) => {
+export const Footer: FC<{ data: FooterType }> = ({ data }) => {
   const navItems = data?.navItems || [];
   const locale = useLocale();
 

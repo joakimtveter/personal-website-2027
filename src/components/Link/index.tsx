@@ -1,4 +1,4 @@
-import React from "react";
+import {FC, ReactNode} from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { Button, type ButtonProps } from "#/components/ui/button";
@@ -9,7 +9,7 @@ import { cn } from "#/utilities/ui";
 
 type CMSLinkType = {
   appearance?: "inline" | ButtonProps["variant"];
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   label?: string | null;
   newTab?: boolean | null;
@@ -22,7 +22,7 @@ type CMSLinkType = {
   url?: string | null;
 };
 
-export const CMSLink: React.FC<CMSLinkType> = (props) => {
+export const CMSLink: FC<CMSLinkType> = (props) => {
   const {
     type,
     appearance = "inline",

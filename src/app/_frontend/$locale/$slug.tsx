@@ -1,6 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import type { RequiredDataFromCollectionSlug } from "payload";
-import React from "react";
 
 import { RenderBlocks } from "#/blocks/RenderBlocks";
 import { RenderHero } from "#/heros/RenderHero";
@@ -8,6 +7,7 @@ import { toLocale } from "#/i18n/locales";
 import { HeaderTheme } from "#/providers/HeaderTheme/HeaderTheme";
 import { getPage } from "#/server/content.functions";
 import { generateMeta } from "#/utilities/generateMeta";
+import { FC } from "react";
 
 export const Route = createFileRoute("/_frontend/$locale/$slug")({
   loader: async ({ params }) => {
@@ -32,7 +32,7 @@ function SlugPage() {
   return <PageView page={Route.useLoaderData().page} />;
 }
 
-export const PageView: React.FC<{ page: RequiredDataFromCollectionSlug<"pages"> }> = ({ page }) => {
+export const PageView: FC<{ page: RequiredDataFromCollectionSlug<"pages"> }> = ({ page }) => {
   const { hero, layout } = page;
 
   return (

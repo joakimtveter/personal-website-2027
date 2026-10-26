@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { FC, Fragment } from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { Media } from "#/components/Media";
@@ -10,7 +10,7 @@ import useClickableCard from "#/utilities/useClickableCard";
 
 export type CardPostData = Pick<Post, "slug" | "categories" | "meta" | "title">;
 
-export const Card: React.FC<{
+export const Card: FC<{
   alignItems?: "center";
   className?: string;
   doc?: CardPostData;

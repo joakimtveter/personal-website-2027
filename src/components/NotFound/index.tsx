@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { Button } from "#/components/ui/button";
 import { useLocale, useMessages } from "#/i18n/useLocale";
 
-export const NotFound: React.FC = () => {
+export const NotFound: FC = () => {
   const locale = useLocale();
   const t = useMessages();
 

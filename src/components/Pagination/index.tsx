@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import React from "react";
+import { FC } from "react";
 
 import {
   Pagination as PaginationComponent,
@@ -13,7 +13,7 @@ import {
 import { useLocale } from "#/i18n/useLocale";
 import { cn } from "#/utilities/ui";
 
-export const Pagination: React.FC<{
+export const Pagination: FC<{
   className?: string;
   page: number;
   totalPages: number;
@@ -41,7 +41,7 @@ export const Pagination: React.FC<{
       <PaginationComponent>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious disabled={!hasPrevPage} onClick={() => goToPage(page - 1)} />
+            <PaginationPrevious disabled={!hasPrevPage} onClick={() => void goToPage(page - 1)} />
           </PaginationItem>
 
           {hasExtraPrevPages && (
@@ -52,19 +52,19 @@ export const Pagination: React.FC<{
 
           {hasPrevPage && (
             <PaginationItem>
-              <PaginationLink onClick={() => goToPage(page - 1)}>{page - 1}</PaginationLink>
+              <PaginationLink onClick={() => void goToPage(page - 1)}>{page - 1}</PaginationLink>
             </PaginationItem>
           )}
 
           <PaginationItem>
-            <PaginationLink isActive onClick={() => goToPage(page)}>
+            <PaginationLink isActive onClick={() => void goToPage(page)}>
               {page}
             </PaginationLink>
           </PaginationItem>
 
           {hasNextPage && (
             <PaginationItem>
-              <PaginationLink onClick={() => goToPage(page + 1)}>{page + 1}</PaginationLink>
+              <PaginationLink onClick={() => void goToPage(page + 1)}>{page + 1}</PaginationLink>
             </PaginationItem>
           )}
 
@@ -75,7 +75,7 @@ export const Pagination: React.FC<{
           )}
 
           <PaginationItem>
-            <PaginationNext disabled={!hasNextPage} onClick={() => goToPage(page + 1)} />
+            <PaginationNext disabled={!hasNextPage} onClick={() => void goToPage(page + 1)} />
           </PaginationItem>
         </PaginationContent>
       </PaginationComponent>

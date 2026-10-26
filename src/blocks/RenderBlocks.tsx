@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { FC, Fragment } from "react";
 
 import { ArchiveBlock } from "#/blocks/ArchiveBlock/Component";
 import { CallToActionBlock } from "#/blocks/CallToAction/Component";
@@ -15,7 +15,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
 };
 
-export const RenderBlocks: React.FC<{
+export const RenderBlocks: FC<{
   blocks: Page["layout"][0][];
 }> = (props) => {
   const { blocks } = props;

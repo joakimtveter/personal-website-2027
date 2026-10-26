@@ -20,9 +20,8 @@ export function CopyButton({ code }: { code: string }) {
       <Button
         className="flex gap-1"
         variant={"secondary"}
-        onClick={async () => {
-          await navigator.clipboard.writeText(code);
-          updateCopyStatus();
+        onClick={() => {
+          void navigator.clipboard.writeText(code).then(updateCopyStatus);
         }}
       >
         <p>{text}</p>

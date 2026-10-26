@@ -1,12 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
-import React, { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
 import { useLocale, useMessages } from "#/i18n/useLocale";
 import { useDebounce } from "#/utilities/useDebounce";
 
-export const Search: React.FC<{ initialValue?: string }> = ({ initialValue = "" }) => {
+export const Search: FC<{ initialValue?: string }> = ({ initialValue = "" }) => {
   const [value, setValue] = useState(initialValue);
   const navigate = useNavigate();
   const locale = useLocale();

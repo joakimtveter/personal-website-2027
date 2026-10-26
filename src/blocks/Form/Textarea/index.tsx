@@ -1,20 +1,22 @@
 import type { TextField } from "@payloadcms/plugin-form-builder/types";
-import React from "react";
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
+import { FC } from "react";
 
 import { Label } from "#/components/ui/label";
 import { Textarea as TextAreaComponent } from "#/components/ui/textarea";
 
 import { Error } from "../Error";
+import { useFieldContext } from "../form";
 import { Width } from "../Width";
 
-export const Textarea: React.FC<
-  TextField & {
-    errors: Partial<FieldErrorsImpl>;
-    register: UseFormRegister<FieldValues>;
-    rows?: number;
-  }
-> = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
+export const Textarea: FC<TextField & { rows?: number }> = ({
+  name,
+  label,
+  required,
+  rows = 3,
+  width,
+}) => {
+  const field = useFieldContext<string>();
+
   return (
     <Width width={width}>
       <Label htmlFor={name}>
@@ -28,13 +30,16 @@ export const Textarea: React.FC<
       </Label>
 
       <TextAreaComponent
-        defaultValue={defaultValue}
+        aria-invalid={!field.state.meta.isValid}
         id={name}
+        name={name}
+        onBlur={field.handleBlur}
+        onChange={(e) => field.handleChange(e.target.value)}
         rows={rows}
-        {...register(name, { required: required })}
+        value={field.state.value}
       />
 
-      {errors[name] && <Error name={name} />}
+      <Error />
     </Width>
   );
 };

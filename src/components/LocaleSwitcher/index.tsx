@@ -1,5 +1,5 @@
 import { useRouterState } from "@tanstack/react-router";
-import React from "react";
+import { FC } from "react";
 
 import { AppLink } from "#/components/AppLink";
 import { isLocale, localeLabels, locales } from "#/i18n/locales";
@@ -19,7 +19,7 @@ const selectPublishedLocales = (matches: { loaderData?: unknown }[]) => {
  * Links to the current path in the other locales (slugs are shared between locales). When the
  * current page or post isn't published in a locale, that locale's home page is linked instead.
  */
-export const LocaleSwitcher: React.FC<{ className?: string }> = ({ className }) => {
+export const LocaleSwitcher: FC<{ className?: string }> = ({ className }) => {
   const locale = useLocale();
   const t = useMessages();
   const { pathname, publishedLocales, searchStr } = useRouterState({

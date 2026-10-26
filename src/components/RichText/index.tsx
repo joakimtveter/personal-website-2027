@@ -9,7 +9,7 @@ import {
   LinkJSXConverter,
   RichText as ConvertRichText,
 } from "@payloadcms/richtext-lexical/react";
-import { useMemo } from "react";
+import { HTMLAttributes, useMemo } from "react";
 
 import { BannerBlock } from "#/blocks/Banner/Component";
 import { CallToActionBlock } from "#/blocks/CallToAction/Component";
@@ -69,7 +69,7 @@ type Props = {
   data: SerializedEditorState;
   enableGutter?: boolean;
   enableProse?: boolean;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;
 
 export default function RichText(props: Props) {
   const { className, enableProse = true, enableGutter = true, ...rest } = props;
