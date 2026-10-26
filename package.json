@@ -1,13 +1,13 @@
 {
   "name": "personal-website-2027",
   "version": "1.0.0",
-  "description": "A blank template to get started with Payload",
+  "description": "",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" payload build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation vite dev",
-    "devsafe": "rm -rf dist && cross-env NODE_OPTIONS=--no-deprecation vite dev",
+    "dev:force": "cross-env NODE_OPTIONS=--no-deprecation vite dev --force",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "oxlint --deny-warnings",
@@ -19,8 +19,6 @@
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
-    "@fontsource-variable/geist": "^5.3.0",
-    "@fontsource-variable/geist-mono": "^5.3.0",
     "@payloadcms/admin-bar": "4.0.0-beta.4",
     "@payloadcms/db-vercel-postgres": "4.0.0-beta.4",
     "@payloadcms/graphql": "4.0.0-beta.4",
