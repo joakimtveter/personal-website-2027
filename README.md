@@ -2,36 +2,18 @@
 
 This TanStack Start template comes configured with the bare minimum to get started on anything you need.
 
-## Quick start
+The app uses Postgres through `@payloadcms/db-vercel-postgres`, which reads its connection string from `POSTGRES_URL`.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+## Local setup
 
-## Quick Start - local setup
+1. `cp .env.example .env` to copy the example environment variables, then set `PAYLOAD_SECRET` to a random string.
+2. Start a Postgres database. The easiest way is `docker compose up -d`, which runs Postgres 17 on port 5432 and matches the `POSTGRES_URL` in `.env.example`. To use your own Postgres instead, point `POSTGRES_URL` at it.
+3. `pnpm install && pnpm dev` to install dependencies and start the dev server.
+4. Open `http://localhost:3000` in your browser.
 
-To spin up this template locally, follow these steps:
+Changes made in `./src` will be reflected in your app. Go to `/admin` and follow the on-screen instructions to create your first admin user.
 
-### Clone
-
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
-
-### Development
-
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `DATABASE_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
-
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
-
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
-
-#### Docker (Optional)
-
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
-
-To do so, follow these steps:
-
-- Modify the `DATABASE_URL` in your `.env` file to `mongodb://mongo/<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+Keep the database host in `POSTGRES_URL` as `localhost` or `127.0.0.1` for local databases. For any other host, the adapter connects through `@vercel/postgres` (Neon's serverless driver) instead of a plain `pg` connection.
 
 ## Production
 
@@ -54,16 +36,6 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
 - #### Media
 
   This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
 
 ## Questions
 

@@ -1,43 +1,19 @@
-version: '3'
-
+# Local Postgres for development. Run the app itself on the host with `pnpm dev`:
+# the Postgres adapter only uses a plain `pg` connection when the POSTGRES_URL host
+# is `localhost` or `127.0.0.1`, so a containerized app pointing at `postgres:5432`
+# would try to connect through @vercel/postgres instead.
 services:
-  payload:
-    image: node:24.22.1-alpine
+  postgres:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-personal-website}
     ports:
-      - '3000:3000'
+      - '5432:5432'
     volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
-    depends_on:
-      - mongo
-      # - postgres
-    env_file:
-      - .env
-
-  # Ensure your DATABASE_URL uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
-  mongo:
-    image: mongo:latest
-    ports:
-      - '27017:27017'
-    command:
-      - --storageEngine=wiredTiger
-    volumes:
-      - data:/data/db
-    logging:
-      driver: none
-
-  # Uncomment the following to use postgres
-  # postgres:
-  #   restart: always
-  #   image: postgres:latest
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
-  data:
-  # pgdata:
-  node_modules:
+  pgdata:
